@@ -24,12 +24,12 @@
 			</props>
 		</property>
 
-		<property name="mappingResources">
+		<!-- <property name="mappingResources">
 			<list>
 				<value>/hibernate/Customer.hbm.xml</value>
 				<value>/hibernate/Account.hbm.xml</value>
 			</list>
-		</property>
+		</property> -->
 	</bean>
 
 </beans>
