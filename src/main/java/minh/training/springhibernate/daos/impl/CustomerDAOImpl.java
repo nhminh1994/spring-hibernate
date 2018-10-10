@@ -19,18 +19,18 @@ public class CustomerDAOImpl extends BaseDAO implements CustomerDAO{
 	public List<Customer> getListCustomer(Customer c) {
 		Session session = getSession();
 		Criteria crit = session.createCriteria(Customer.class);
-		/*if (null != c){
+		if (null != c){
 		if (MyValidationUtils.checkFieldNotNullWithValue(c.getGender(), ""))
-			crit.add(Restrictions.eq("name", c.getName()));
+			crit.add(Restrictions.like("name", '%'+c.getName()+'%'));
 		if (MyValidationUtils.checkFieldNotNullWithValue(c.getAddressLine(), ""))
-			crit.add(Restrictions.eq("addressline", c.getAddressLine()));
+			crit.add(Restrictions.like("addressline", '%'+c.getAddressLine()+'%'));
 		if (MyValidationUtils.checkFieldNotNullWithValue(c.getEmail(), ""))
-			crit.add(Restrictions.eq("email", c.getEmail()));
-		if (MyValidationUtils.checkFieldNotNullWithValue(c.getDateOfBirth(), new Date()));
+			crit.add(Restrictions.like("email", '%'+c.getEmail()+'%'));
+		if (MyValidationUtils.checkFieldNotNullWithValue(c.getDateOfBirth(), new Date()))
 			crit.add(Restrictions.eq("dateofbirth", c.getDateOfBirth()));
 		if (MyValidationUtils.checkFieldNotNullWithValue(c.getPhone(), ""))
-				crit.add(Restrictions.eq("phone", c.getPhone()));
-		}*/
+			crit.add(Restrictions.like("phone", '%'+c.getPhone()+'%'));
+		}
 		return crit.list();
 	}
 }

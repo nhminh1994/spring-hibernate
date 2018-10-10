@@ -5,11 +5,11 @@ public class MyValidationUtils {
 		if (null == field)
 			return false;
 		if (field instanceof String)
-			return field.toString().trim().equals(value.toString().trim());
+			return !field.toString().trim().equals(value.toString().trim());
 		if (field instanceof Boolean)
-			return field == value;
+			return field != value;
 		if (field instanceof java.util.Date)
-			return field.equals(value);
+			return !field.equals(value);
 		return false;
 	}
 }

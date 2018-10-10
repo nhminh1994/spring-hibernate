@@ -7,22 +7,22 @@
 	<bean id="baseDAO" class="minh.training.springhibernate.daos.BaseDAO">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
-	<alias name="userDAOImpl" alias="userDAO"/>
+	<alias name="userDAOImpl" alias="userDAO" />
 	<bean id="userDAOImpl" class="minh.training.springhibernate.daos.impl.UserDAOImpl"
-	parent="baseDAO">
+		parent="baseDAO">
 	</bean>
-	<alias name="customerDAOImpl" alias="customerDAO"/>
+	<alias name="customerDAOImpl" alias="customerDAO" />
 	<bean id="customerDAOImpl" class="minh.training.springhibernate.daos.impl.CustomerDAOImpl"
-	parent="baseDAO" >
+		parent="baseDAO">
 	</bean>
-	
+
 	<!-- Services -->
-	<alias name="myUserDetailsService" alias="userDetailsService"/>
+	<alias name="myUserDetailsService" alias="userDetailsService" />
 	<bean id="myUserDetailsService"
 		class="minh.training.springhibernate.services.impl.MyUserDetailsService">
 		<property name="userDAO" ref="userDAO"></property>
 	</bean>
-	<alias name="customerDefaultService" alias="customerService"/>
+	<alias name="customerDefaultService" alias="customerService" />
 	<bean id="customerDefaultService"
 		class="minh.training.springhibernate.services.impl.CustomerDefaultService">
 		<property name="customerDAO" ref="customerDAO"></property>

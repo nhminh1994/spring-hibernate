@@ -22,6 +22,7 @@ public class CustomerController {
 	@RequestMapping(value = { "/customers", "/" })
 	public String customerlist(@ModelAttribute("customer") Customer customer, ModelMap modelMap) {
 		List<Customer> lstCustomer = customerService.getListCustomer(customer);
+		modelMap.addAttribute("customers", lstCustomer);
 		return "customerlist";
 	}
 }

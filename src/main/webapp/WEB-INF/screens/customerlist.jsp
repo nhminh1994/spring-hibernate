@@ -8,41 +8,48 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form:form method="POST" action="addEmployee" modelAttribute="employee">
+<form:form method="POST" action="customers" modelAttribute="customer">
 	<table>
 		<tr>
 			<td>
 				<div>Name</div>
 			</td>
-			<td><input type="text" id="searchName"></td>
+			<td><input type="text" name="name"></td>
 			<td>
 				<div>Phone</div>
 			</td>
-			<td><input type="text" id="searchPhone"></td>
+			<td><input type="text" name="phone"></td>
 		</tr>
 		<tr>
 			<td>
 				<div>Date of Birth</div>
 			</td>
-			<td><input type="date" id="searchDob"></td>
+			<td><input type="date" name="dateofbirth"></td>
 			<td>
 				<div>Gender</div>
 			</td>
-			<td><input type="radio" id="searchGender" name="searchGender"
-				value="male"> <input type="radio" id="searchGender"
-				name="searchGender" value="female"></td>
+			<td><input type="radio" name="gender" value="male"> 
+				<input type="radio" name="gender" value="female"></td>
 		</tr>
 		<tr>
 			<td>
 				<div>Email</div>
 			</td>
-			<td><input type="text" id="searchEmail"></td>
+			<td><input type="text" id="email"></td>
 			<td></td>
 			<td><input type="button" id="resetBtn" value="Reset"> 
-				<input type="button" id="searchBtn" value="Search"></td>
+				<input type="submit" id="searchBtn" value="Search"></td>
 
 		</tr>
 	</table>
+	<div>
+		<table border="1" style="border-collapse: collapse">
+			<thead><tr><th></th><th>Name</th><th>Date of Birth</th><th>Phone</th><th>Email</th></tr></thead>
+			<c:forEach var="customer" items="${customers}">
+			<tr><td><input type="checkbox" name="id" value="${customer.id }"> </td><td>${customer.name}</td><td> ${customer.dateOfBirth}</td> <td>${customer.phone}</td><td>${customer.email}</td></tr>
+			</c:forEach>
+		</table>
+	</div>
 </form:form>
 </body>
 </html>
