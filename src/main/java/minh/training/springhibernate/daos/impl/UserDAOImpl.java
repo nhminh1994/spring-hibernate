@@ -15,6 +15,7 @@ import minh.training.springhibernate.daos.BaseDAO;
 import minh.training.springhibernate.daos.UserDAO;
 import minh.training.springhibernate.models.User;
 
+@Transactional
 public class UserDAOImpl extends BaseDAO implements UserDAO {
 	@Required
 	public void setSessionFactory(SessionFactory sessionFactory) {
