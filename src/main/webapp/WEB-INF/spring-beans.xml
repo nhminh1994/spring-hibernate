@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+	<!-- DAOs -->
+	<bean id="baseDAO" class="minh.training.springhibernate.daos.BaseDAO">
+		<property name="sessionFactory" ref="mySessionFactory"></property>
+	</bean>
+	<alias name="userDAOImpl" alias="userDAO"/>
+	<bean id="userDAOImpl" class="minh.training.springhibernate.daos.impl.UserDAOImpl"
+	parent="baseDAO">
+	</bean>
+	<alias name="customerDAOImpl" alias="customerDAO"/>
+	<bean id="customerDAOImpl" class="minh.training.springhibernate.daos.impl.CustomerDAOImpl"
+	parent="baseDAO" >
+	</bean>
+	
+	<!-- Services -->
+	<alias name="myUserDetailsService" alias="userDetailsService"/>
+	<bean id="myUserDetailsService"
+		class="minh.training.springhibernate.services.impl.MyUserDetailsService">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<alias name="customerDefaultService" alias="customerService"/>
+	<bean id="customerDefaultService"
+		class="minh.training.springhibernate.services.impl.CustomerDefaultService">
+		<property name="customerDAO" ref="customerDAO"></property>
+	</bean>
+
+</beans>
