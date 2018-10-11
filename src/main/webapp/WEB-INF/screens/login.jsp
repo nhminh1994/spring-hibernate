@@ -25,7 +25,7 @@
 	<form name='loginForm' action="<c:url value='j_spring_security_login' />" method='POST'>
 	<!-- <form name='loginForm' action="/customers" method='POST'> -->
 		<div class="login">
-			<input type="text" placeholder="username" name="user"><br>
+			<input type="text" placeholder="username" name="username"><br>
 			<input type="password" placeholder="password" name="password"><br>
 			<input name="submit" type="submit" value="login" /> <input
 				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

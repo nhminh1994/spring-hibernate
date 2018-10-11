@@ -156,19 +156,7 @@ body{
 
 <body>
 
-  <div class="body"></div>
-		<div class="grad"></div>
-		<div class="header">
-			<div>Minh<span>Site</span></div>
-		</div>
-		<br>
-		<div class="login">
-				<input type="text" placeholder="username" name="user"><br>
-				<input type="password" placeholder="password" name="password"><br>
-				<input type="button" value="Login">
-		</div>
-
-  <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+	<div>Hello World</div>
 
 </body>
 

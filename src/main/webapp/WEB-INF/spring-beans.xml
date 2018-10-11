@@ -28,4 +28,14 @@
 		<property name="customerDAO" ref="customerDAO"></property>
 	</bean>
 
+	<!-- Others -->
+	<bean id="titleMap" class="java.util.HashMap" scope="prototype">
+    <constructor-arg>
+        <map key-type="java.lang.String" value-type="java.lang.String">
+            <entry key="mr" value="Mr" />
+            <entry key="ms" value="Ms" />
+            <entry key="mrs" value="Mrs" />
+        </map>
+    </constructor-arg>
+</bean>
 </beans>

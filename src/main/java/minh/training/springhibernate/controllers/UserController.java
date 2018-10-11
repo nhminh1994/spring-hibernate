@@ -5,10 +5,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import minh.training.springhibernate.daos.UserDAO;
+import minh.training.springhibernate.screenmodels.LoginData;
 
 @Controller
 public class UserController {
@@ -16,7 +18,8 @@ public class UserController {
 	private ApplicationContext applicationContext;
 
 	@RequestMapping(value = { "/login", "/" })
-	public String login(@RequestParam(value = "error", required = false) final String error, final Model model) {
+	public String login(
+			@RequestParam(value = "error", required = false) final String error, final Model model) {
 		if (error != null) {
 			model.addAttribute("message", "Login Failed!");
 		}

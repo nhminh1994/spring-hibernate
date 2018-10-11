@@ -21,11 +21,10 @@ public class MyUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			return null;
 		}
-		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
-		return new User(username, user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
+		return new User(user.getUsername(), user.getPassword(), user.getEnabled(), accountNonExpired, credentialsNonExpired,
 				accountNonLocked, user.getAuthorities());
 	}
 }

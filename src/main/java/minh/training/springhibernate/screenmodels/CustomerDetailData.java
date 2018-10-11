@@ -1,39 +1,48 @@
-package minh.training.springhibernate.models;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+package minh.training.springhibernate.screenmodels;
 
 import java.util.Date;
 
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "Customer", catalog = "mydb")
-public class Customer implements java.io.Serializable {
+public class CustomerDetailData implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	@Length(max = 255)
+	@NotNull
+	@NotBlank
 	private String name;
+	@NotNull
+	@NotBlank
 	private Date dateOfBirth;
+	@Length(max = 15)
+	@NotNull
+	@NotBlank
 	private String phone;
+	@Email
+	@NotNull
+	@NotBlank
 	private String email;
+	@NotNull
+	@NotBlank
 	private Boolean gender;
+	@NotNull
+	@NotBlank
+	@Length(max = 4000)
 	private String addressLine;
+	@NotNull
+	@NotBlank
 	private String title;
 
-	public Customer() {
+	public CustomerDetailData() {
 	}
 
-	public Customer(Integer id, String name, Date dateOfBirth, String phone, String email, Boolean gender,
+	public CustomerDetailData(Integer id, String name, Date dateOfBirth, String phone, String email, Boolean gender,
 			String addressLine, String tittle) {
 		super();
 		this.id = id;
@@ -46,9 +55,6 @@ public class Customer implements java.io.Serializable {
 		this.title = tittle;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
 	}
@@ -56,8 +62,7 @@ public class Customer implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	@Column(name = "name", length = 255)
+
 	public String getName() {
 		return name;
 	}
@@ -65,9 +70,7 @@ public class Customer implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@Column(name = "dateofbirth")
-	@Temporal(TemporalType.DATE)
+
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -75,8 +78,7 @@ public class Customer implements java.io.Serializable {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
-	@Column(name = "phone", length = 15)
+
 	public String getPhone() {
 		return phone;
 	}
@@ -84,8 +86,7 @@ public class Customer implements java.io.Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	@Column(name = "email", length = 255)
+
 	public String getEmail() {
 		return email;
 	}
@@ -93,9 +94,7 @@ public class Customer implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Column(name = "gender")
-	@org.hibernate.annotations.Type(type="yes_no")
+
 	public Boolean getGender() {
 		return gender;
 	}
@@ -103,8 +102,7 @@ public class Customer implements java.io.Serializable {
 	public void setGender(Boolean gender) {
 		this.gender = gender;
 	}
-	
-	@Column(name = "addressline", length = 255)
+
 	public String getAddressLine() {
 		return addressLine;
 	}
@@ -112,8 +110,7 @@ public class Customer implements java.io.Serializable {
 	public void setAddressLine(String addressLine) {
 		this.addressLine = addressLine;
 	}
-	
-	@Column(name = "title", length = 255)
+
 	public String getTitle() {
 		return title;
 	}

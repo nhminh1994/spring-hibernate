@@ -16,7 +16,6 @@ import minh.training.springhibernate.utils.MyValidationUtils;
 @Transactional
 public class CustomerDAOImpl extends BaseDAO implements CustomerDAO {
 
-	@SuppressWarnings("unchecked")
 	public List<Customer> getListCustomer(Customer c) {
 		Session session = getSession();
 		Criteria crit = session.createCriteria(Customer.class);
@@ -31,9 +30,19 @@ public class CustomerDAOImpl extends BaseDAO implements CustomerDAO {
 				crit.add(Restrictions.eq("dateOfBirth", c.getDateOfBirth()));
 			if (MyValidationUtils.checkFieldNotNullWithValue(c.getPhone(), ""))
 				crit.add(Restrictions.like("phone", '%' + c.getPhone() + '%'));
-			if (null != c.getName())
-				crit.add(Restrictions.like("name", '%' + c.getName() + '%'));
+			if (null != c.getGender())
+				crit.add(Restrictions.eq("gender", c.getGender()));
 		}
 		return crit.list();
+	}
+	
+	public void saveOrUpdateCustomer(Customer c){
+		Session session = getSession();
+		session.saveOrUpdate(c);
+	}
+
+	public Customer getCustomerById(Integer id) {
+		Session session = getSession();
+		return session.get(Customer.class, id);
 	}
 }
