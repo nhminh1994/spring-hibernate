@@ -59,6 +59,7 @@ public class CustomerController {
 	@RequestMapping(value = { "processupdate" })
 	public ModelAndView processUpdate(@ModelAttribute("customerdetaildata") @Valid CustomerDetailData customer,
 			BindingResult result, ModelMap modelMap) {
+		modelMap.put("titlemap", titleMap);
 		if (result.hasErrors()) {
 			return new ModelAndView("/customers/customerdetail");
 		}

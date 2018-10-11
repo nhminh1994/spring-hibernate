@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import minh.training.springhibernate.validators.annotations.Phone;
+
 @Entity
 public class CustomerDetailData implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,18 +20,17 @@ public class CustomerDetailData implements java.io.Serializable {
 	@NotBlank
 	private String name;
 	@NotNull
-	@NotBlank
 	private Date dateOfBirth;
 	@Length(max = 15)
 	@NotNull
 	@NotBlank
+	@Phone
 	private String phone;
 	@Email
 	@NotNull
 	@NotBlank
 	private String email;
 	@NotNull
-	@NotBlank
 	private Boolean gender;
 	@NotNull
 	@NotBlank

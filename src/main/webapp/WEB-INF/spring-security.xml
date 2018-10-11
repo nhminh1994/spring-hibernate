@@ -12,6 +12,7 @@
 		    login-page="/login"
 		    login-processing-url="/j_spring_security_login"
 		    default-target-url="/customers"
+		    always-use-default-target="true"
 			authentication-failure-url="/login?error"
 			username-parameter="username"
 			password-parameter="password" />
