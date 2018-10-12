@@ -94,7 +94,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]{
+.login input[type=button], input[type=submit]{
 	width: 260px;
 	height: 35px;
 	background: #fff;
@@ -109,7 +109,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]:hover{
+.login input[type=button]:hover, input[type=submit]:hover{
 	opacity: 0.8;
 }
 
@@ -137,7 +137,4 @@ body{
 
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
-}
-.error {
-	color:#ff0000;
 }

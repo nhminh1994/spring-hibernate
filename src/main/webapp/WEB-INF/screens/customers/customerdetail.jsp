@@ -27,8 +27,8 @@
 					<td>
 						<div>Phone</div>
 					</td>
-					<td><form:input path="phone" /> <form:errors path="phone"
-							cssClass="error" /></td>
+					<td><form:input path="phone" type="number" />
+						<form:errors path="phone" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
@@ -76,4 +76,7 @@
 		</form:form>
 	</div>
 </body>
+<script>
+
+</script>
 </html>

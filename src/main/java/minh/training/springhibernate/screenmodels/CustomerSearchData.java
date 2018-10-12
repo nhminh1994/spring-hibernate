@@ -15,6 +15,9 @@ public class CustomerSearchData implements java.io.Serializable  {
 	@Email
 	private String email;
 	private Boolean gender;
+	private Integer currentPage;
+	private Integer numOfPage;
+	private String sort;
 
 	public CustomerSearchData() {
 	}
@@ -66,5 +69,29 @@ public class CustomerSearchData implements java.io.Serializable  {
 
 	public void setGender(Boolean gender) {
 		this.gender = gender;
+	}
+
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public Integer getNumOfPage() {
+		return numOfPage;
+	}
+
+	public void setNumOfPage(Integer numOfPage) {
+		this.numOfPage = numOfPage;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 }

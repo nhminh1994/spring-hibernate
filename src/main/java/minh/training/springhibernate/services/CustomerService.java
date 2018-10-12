@@ -10,4 +10,7 @@ public interface CustomerService {
 	List<CustomerDetailData> getListCustomer(CustomerSearchData c);
 	void updateOrInsertCustomer(CustomerDetailData c);
 	CustomerDetailData getCustomerDetailById(Integer id);
+	int countCustomers(CustomerSearchData c);
+	List<CustomerDetailData> getListPagingCustomer(CustomerSearchData c, int currentPage);
+	void deleteCustomers(String ids);
 }

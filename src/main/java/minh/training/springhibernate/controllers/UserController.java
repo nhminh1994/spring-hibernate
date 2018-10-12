@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	private ApplicationContext applicationContext;
 
-	@RequestMapping(value = { "/login", "/" })
+	@RequestMapping(value = { "/login" })
 	public String login(
 			@RequestParam(value = "error", required = false) final String error, final Model model) {
 		if (error != null) {

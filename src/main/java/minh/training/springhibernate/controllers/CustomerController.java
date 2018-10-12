@@ -23,6 +23,7 @@ import minh.training.springhibernate.screenmodels.CustomerDetailData;
 import minh.training.springhibernate.screenmodels.CustomerSearchData;
 import minh.training.springhibernate.services.CustomerService;
 import minh.training.springhibernate.utils.ExcelReportView;
+import minh.training.springhibernate.utils.MyCommonUtils;
 
 @Controller
 public class CustomerController {
@@ -32,13 +33,21 @@ public class CustomerController {
 	@Autowired
 	private HashMap<String, String> titleMap;
 
-	@RequestMapping(value = { "customers" })
-	public String customerlist(@ModelAttribute("customer") @Valid CustomerSearchData customer, BindingResult result,
+	@RequestMapping(value = { "customers", "/" })
+	public String customerlist(@ModelAttribute("customersearchdata") @Valid CustomerSearchData customer, BindingResult result,
 			ModelMap modelMap) {
+		
+		if (null == customer.getNumOfPage() || null == customer.getCurrentPage()){
+			int numOfCustomers = customerService.countCustomers(customer);
+			int pageSize = MyCommonUtils.PAGE_SIZE;
+			int numOfPages = numOfCustomers / pageSize;
+			customer.setNumOfPage(numOfCustomers % pageSize == 0 ? numOfPages : numOfPages+1);
+			customer.setCurrentPage(1);
+		}
 		if (result.hasErrors()) {
 			return "/customers/customerlist";
 		}
-		List<CustomerDetailData> lstCustomer = customerService.getListCustomer(customer);
+		List<CustomerDetailData> lstCustomer = customerService.getListPagingCustomer(customer, customer.getCurrentPage());
 		modelMap.put("lstcustomer", lstCustomer);
 		return "/customers/customerlist";
 	}
@@ -79,5 +88,12 @@ public class CustomerController {
 	public ModelAndView getExcel() {
 		List<CustomerDetailData> lstCustomer = customerService.getListCustomer(new CustomerSearchData());
 		return new ModelAndView(new ExcelReportView(), "customerlist", lstCustomer);
+	}
+	
+	@RequestMapping(value = { "delete" })
+	public String delete(@RequestParam(value = "customerIds") String ids, ModelMap modelMap,
+			final RedirectAttributes redirectAttributes) {
+		customerService.deleteCustomers(ids);
+		return "redirect:customers";
 	}
 }
