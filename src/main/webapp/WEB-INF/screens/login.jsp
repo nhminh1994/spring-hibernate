@@ -7,7 +7,7 @@
 
 <meta charset="UTF-8">
 
-<title>CodePen - Random Login Form</title>
+<title>Login</title>
 
 <script src="<c:url value="/resources/js/prefixfree.min.js" />"></script>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<br>
-	<form name='loginForm' action="<c:url value='j_spring_security_login' />" method='POST'>
+	<form id='loginForm' name='loginForm' action="<c:url value='j_spring_security_login' />" method='POST'>
 		<div class="login">
 			<input type="text" placeholder="username" name="username"><br>
 			<input type="password" placeholder="password" name="password"><br>
@@ -42,9 +42,7 @@
 	function resetProcess() {
 		$(':input','#loginForm')
 		  .not(':button, :submit, :reset, :hidden')
-		  .val('')
-		  .removeAttr('checked')
-		  .removeAttr('selected');
+		  .val('');
 	}
 </script>
 </html>

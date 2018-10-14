@@ -6,10 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/error.css" />" rel="stylesheet">
-<title>Insert title here</title>
+<title>Customer Detail</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div>
+	<div class="container">
 		<h3>Customer Information</h3>
 		<br>
 		<form:form id="detailForm" method="POST" action="processupdate"
@@ -20,21 +26,21 @@
 					<td>
 						<div>Name</div>
 					</td>
-					<td><form:input path="name" /> <form:errors path="name"
+					<td><form:input class="form-control" path="name" /> <form:errors path="name"
 							cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Phone</div>
 					</td>
-					<td><form:input path="phone" type="number" />
+					<td><form:input class="form-control" path="phone" type="number" />
 						<form:errors path="phone" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Date of Birth</div>
 					</td>
-					<td><form:input type="date" path="dateOfBirth" /> <form:errors
+					<td><form:input class="form-control" type="date" path="dateOfBirth" /> <form:errors
 							path="dateOfBirth" cssClass="error" /></td>
 				</tr>
 				<tr>
@@ -49,28 +55,28 @@
 					<td>
 						<div>Email</div>
 					</td>
-					<td><form:input path="email" /> <form:errors path="email"
+					<td><form:input path="email" class="form-control"/> <form:errors path="email"
 							cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Address</div>
 					</td>
-					<td><form:textarea path="addressLine" /> <form:errors
+					<td><form:textarea path="addressLine" class="form-control"/> <form:errors
 							path="addressLine" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Title</div>
 					</td>
-					<td><form:select path="title">
-							<form:options items="${titlemap}" />
+					<td><form:select class="form-control" path="title">
+							<form:options class="form-control" items="${titlemap}" />
 						</form:select> <form:errors path="title" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td><input type="button" id="resetBtn" value="Reset"
-						onclick="reset()"> <input type="submit" id="saveBtn"
-						value="Save"></td>
+						onclick="reset()" class="btn btn-default"> <input type="submit" id="saveBtn"
+						value="Save" class="btn btn-default"></td>
 				</tr>
 			</table>
 		</form:form>

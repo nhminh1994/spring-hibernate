@@ -12,13 +12,13 @@ public class PageNavitionTag extends SimpleTagSupport {
 	@Override
     public void doTag() throws JspException, IOException {
         final JspWriter writer = getJspContext().getOut();
-        String first = "<button id=\"first\" type=\"button\" value=\"" + 1 + "\" class=\"pageNav\"	><<</button>"; 
-        String last = "<button id=\"last\" type=\"button\" value=\"" + max + "\" class=\"pageNav\">>></button>";
-        String next = "<button id=\"next\" type=\"button\"  value=\"" + (current+1) + "\" class=\"pageNav\">></button>";
-        String previous = "<button id=\"previous\" type=\"button\"  value=\"" + (current-1) + "\" class=\"pageNav\"><</button>";
-        String currentPage = "<input id=\"curpageno\" type=\"button\" value=\"" + current + "\" class=\"pageNav\" disabled>";
-        String nextPage = "<input id=\"nextpageno\" type=\"button\" value=\"" + (current+1) + "\" class=\"pageNav\">";
-        String previousPage = "<input id=\"prevpageno\" type=\"button\" value=\"" + (current-1) + "\" class=\"pageNav\">";
+        String first = "<button id=\"first\" type=\"button\" value=\"" + 1 + "\" class=\"pageNav btn btn-default\"	><<</button>"; 
+        String last = "<button id=\"last\" type=\"button\" value=\"" + max + "\" class=\"pageNav btn btn-default\">>></button>";
+        String next = "<button id=\"next\" type=\"button\"  value=\"" + (current+1) + "\" class=\"pageNav btn btn-default\">></button>";
+        String previous = "<button id=\"previous\" type=\"button\"  value=\"" + (current-1) + "\" class=\"pageNav btn btn-default\"><</button>";
+        String currentPage = "<input id=\"curpageno\" type=\"button\" value=\"" + current + "\" class=\"pageNav btn btn-default\" disabled>";
+        String nextPage = "<input id=\"nextpageno\" type=\"button\" value=\"" + (current+1) + "\" class=\"pageNav btn btn-default\">";
+        String previousPage = "<input id=\"prevpageno\" type=\"button\" value=\"" + (current-1) + "\" class=\"pageNav btn btn-default\">";
         StringBuilder tag = new StringBuilder();
         if (current == 1 && current < max){
         	tag.append(currentPage);

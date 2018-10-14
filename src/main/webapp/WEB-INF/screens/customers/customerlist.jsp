@@ -16,7 +16,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<title>Insert title here</title>
+<%-- <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<link href="<c:url value="/resources/css/bootstrap.min.css" />"
+	rel="stylesheet"> --%>
+
+<title>Customer List</title>
 </head>
 <body>
 	<div class="container">
@@ -57,8 +61,8 @@
 								cssClass="error" /></div></td>
 						<td><div class="form-group"></div></td>
 						<td><div class="form-group"><input type="button" id="resetBtn" value="Reset"
-							onclick="resetProcess()"> <input type="button"
-							id="searchBtn" value="Search"></div></td>
+							onclick="resetProcess()" class="btn btn-default"> <input type="button"
+							id="searchBtn" value="Search" class="btn btn-default"></div></td>
 					</tr>
 				</table>
 			</div>
@@ -114,7 +118,7 @@
 		<form action="<c:url value="/j_spring_security_logout" />"
 			method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <input type="submit" value="Logout" />
+				value="${_csrf.token}" /> <input type="submit" value="Logout" class="btn btn-default" />
 		</form>
 	</div>
 </body>
