@@ -11,6 +11,7 @@ import minh.training.springhibernate.screenmodels.CustomerDetailData;
 import minh.training.springhibernate.screenmodels.CustomerSearchData;
 import minh.training.springhibernate.services.CustomerService;
 import minh.training.springhibernate.utils.MyCommonUtils;
+import minh.training.springhibernate.utils.SortUtils;
 
 public class CustomerDefaultService implements CustomerService {
 
@@ -54,12 +55,12 @@ public class CustomerDefaultService implements CustomerService {
 		return (int) (count / 1);
 	}
 
-	public List<CustomerDetailData> getListPagingCustomer(CustomerSearchData c, int currentPage) {
+	public List<CustomerDetailData> getListPagingCustomer(CustomerSearchData c) {
 		Customer customer = new Customer(null, c.getName(), c.getDateOfBirth(), c.getPhone(), c.getEmail(),
 				c.getGender(), null, null);
 		int pageSize = MyCommonUtils.PAGE_SIZE;
-		int start = (currentPage - 1) * pageSize;
-		List<Customer> lstCustomer = customerDAO.getListPagingCustomer(customer, start, pageSize);
+		int start = (c.getCurrentPage() - 1) * pageSize;
+		List<Customer> lstCustomer = customerDAO.getListPagingCustomer(customer, start, pageSize, SortUtils.getSort(c));
 		List<CustomerDetailData> lstCDD = new ArrayList<CustomerDetailData>();
 		for (Customer cus : lstCustomer) {
 			CustomerDetailData cdd = new CustomerDetailData(cus.getId(), cus.getName(), cus.getDateOfBirth(),
@@ -72,12 +73,12 @@ public class CustomerDefaultService implements CustomerService {
 	public void deleteCustomers(String ids) {
 		String[] arrId = ids.split("/");
 		List<Integer> lstId = new ArrayList<Integer>();
-		for (int i = 0; i < arrId.length; i++){
-			if (!arrId[i].trim().equals("")){
+		for (int i = 0; i < arrId.length; i++) {
+			if (!arrId[i].trim().equals("")) {
 				lstId.add(Integer.valueOf(arrId[i]));
 			}
 		}
-		if (lstId.isEmpty()){
+		if (lstId.isEmpty()) {
 			return;
 		}
 		customerDAO.deleteCustomers(lstId);

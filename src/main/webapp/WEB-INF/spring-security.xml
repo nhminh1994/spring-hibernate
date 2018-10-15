@@ -14,7 +14,7 @@
 		    login-processing-url="/j_spring_security_login"
 		    default-target-url="/customers"
 		    always-use-default-target="true"
-			authentication-failure-url="/login?error"
+			authentication-failure-url="/login?auth=failure"
 			username-parameter="username"
 			password-parameter="password" />
 		<logout logout-url="/j_spring_security_logout"
@@ -22,8 +22,10 @@
 	</http>
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="userDetailsService">
+<!-- 		<authentication-provider user-service-ref="userDetailsService">
 			<password-encoder hash="bcrypt" />
+		</authentication-provider> -->
+		<authentication-provider ref="customDaoAuthenticationProvider">
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans>

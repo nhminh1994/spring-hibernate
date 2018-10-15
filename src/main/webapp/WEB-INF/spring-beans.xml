@@ -27,7 +27,18 @@
 		class="minh.training.springhibernate.services.impl.CustomerDefaultService">
 		<property name="customerDAO" ref="customerDAO"></property>
 	</bean>
-
+	<bean id="customAuthenticationProvider"
+		class="minh.training.springhibernate.security.CustomAuthenticationProvider">
+	</bean>
+	<bean id="myPassWordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	</bean>
+	<bean id="customDaoAuthenticationProvider"
+		class="minh.training.springhibernate.security.CustomDaoAuthenticationProvider">
+		<property name="userDetailsService" ref="myUserDetailsService"></property>
+		<property name="passwordEncoder" ref="myPassWordEncoder"></property>
+	</bean>
+	
 	<!-- Others -->
 	<bean id="titleMap" class="java.util.HashMap" scope="prototype">
     <constructor-arg>

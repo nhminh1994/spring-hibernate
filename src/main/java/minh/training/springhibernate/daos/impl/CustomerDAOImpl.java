@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import minh.training.springhibernate.daos.BaseDAO;
 import minh.training.springhibernate.daos.CustomerDAO;
 import minh.training.springhibernate.models.Customer;
 import minh.training.springhibernate.utils.MyValidationUtils;
+import minh.training.springhibernate.utils.SortUtils;
 
 @Transactional
 public class CustomerDAOImpl extends BaseDAO implements CustomerDAO {
@@ -68,7 +70,7 @@ public class CustomerDAOImpl extends BaseDAO implements CustomerDAO {
 		return (Long) crit.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
-	public List<Customer> getListPagingCustomer(Customer c, int start, int pageSize) {
+	public List<Customer> getListPagingCustomer(Customer c, int start, int pageSize, Order order) {
 		Session session = getSession();
 		Criteria crit = session.createCriteria(Customer.class);
 		if (null != c) {
@@ -87,6 +89,8 @@ public class CustomerDAOImpl extends BaseDAO implements CustomerDAO {
 		}
 		crit.setFirstResult(start);
 		crit.setMaxResults(pageSize);
+		if (null != order)
+			crit.addOrder(order);
 		return crit.list();
 	}
 

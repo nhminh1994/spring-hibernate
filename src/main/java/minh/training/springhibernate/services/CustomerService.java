@@ -11,6 +11,6 @@ public interface CustomerService {
 	void updateOrInsertCustomer(CustomerDetailData c);
 	CustomerDetailData getCustomerDetailById(Integer id);
 	int countCustomers(CustomerSearchData c);
-	List<CustomerDetailData> getListPagingCustomer(CustomerSearchData c, int currentPage);
+	List<CustomerDetailData> getListPagingCustomer(CustomerSearchData c);
 	void deleteCustomers(String ids);
 }

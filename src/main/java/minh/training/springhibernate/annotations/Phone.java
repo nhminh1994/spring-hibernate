@@ -1,4 +1,4 @@
-package minh.training.springhibernate.validators.annotations;
+package minh.training.springhibernate.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

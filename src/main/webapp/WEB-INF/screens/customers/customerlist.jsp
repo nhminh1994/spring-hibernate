@@ -9,6 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/error.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/sort.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/js/myjs.js" />"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -30,95 +32,140 @@
 				<table>
 					<tr>
 						<td><div class="form-group">
-							<div>Name</div>
-						</div></td>
-						
-						<td><div class="form-group"><form:input class="form-control" path="name" /> <form:errors path="name"
-								cssClass="error" /></div></td></div>
-						<td><div class="form-group">
-							<div>Phone</div>
-						</div></td>
-						<td><div class="form-group"><form:input class="form-control" path="phone" /> <form:errors path="phone"
-								cssClass="error" /></div></td>
-					</tr>
-					<tr>
-						<td><div class="form-group">
-							<div>Date of Birth</div>
-						</div></td>
-						<td><div class="form-group"><form:input class="form-control" type="date" path="dateOfBirth" /> <form:errors
-								path="dateOfBirth" cssClass="error" /></div></td>
-						<td><div class="form-group">
-							<div>Gender</div>
-						</div></td>
-						<td><div class="form-group"><form:radiobutton path="gender" value="true" />Male <form:radiobutton
-								path="gender" value="false" />Female</div></td>
-					</tr>
-					<tr>
-						<td><div class="form-group">
-							<div>Email</div>
-						</div></td>
-						<td><div class="form-group"><form:input class="form-control" path="email" /> <form:errors path="email"
-								cssClass="error" /></div></td>
-						<td><div class="form-group"></div></td>
-						<td><div class="form-group"><input type="button" id="resetBtn" value="Reset"
-							onclick="resetProcess()" class="btn btn-default"> <input type="button"
-							id="searchBtn" value="Search" class="btn btn-default"></div></td>
-					</tr>
-				</table>
-			</div>
-			<div class="table-responsive">
-				<table class="table" id="listTable">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Name <span id="sortName" class="sort-arrow">&#9660;</span></th>
-							<th>Date of Birth <span id="sortName" class="sort-arrow">&#9660;</span></th>
-							<th>Phone <span id="sortName" class="sort-arrow">&#9660;</span></th>
-							<th>Email <span id="sortName" class="sort-arrow">&#9660;</span></th>
-						</tr>
-					</thead>
-					<c:forEach var="customer" items="${lstcustomer}">
-						<tr>
-							<td><div class="form-group"><input type="checkbox" name="${customer.id}"
-								value="${customer.id}" onclick="fetchId(${customer.id})">
+								<div>Name</div>
 							</div></td>
-							<td><div class="form-group">${customer.name}</div></td>
-							<td><div class="form-group">${customer.dateOfBirth}</div></td>
-							<td><div class="form-group">${customer.phone}</div></td>
-							<td><div class="form-group">${customer.email}</div></td>
-						</tr>
-					</c:forEach>
+
+						<td><div class="form-group">
+								<form:input class="form-control" path="name" />
+								<form:errors path="name" cssClass="error" />
+							</div></td>
+						<td><div class="form-group">
+								<div>Phone</div>
+							</div></td>
+						<td><div class="form-group">
+								<form:input class="form-control" path="phone"
+									onkeypress="return AllowOnlyNumbers(event);" />
+								<form:errors path="phone" cssClass="error" />
+							</div></td>
+					</tr>
+					<tr>
+						<td><div class="form-group">
+								<div>Date of Birth</div>
+							</div></td>
+						<td><div class="form-group">
+								<form:input class="form-control" type="date" path="dateOfBirth"
+									min="2000-01-01" />
+								<form:errors path="dateOfBirth" cssClass="error" />
+							</div></td>
+						<td><div class="form-group">
+								<div>Gender</div>
+							</div></td>
+						<td><div class="form-group">
+								<form:radiobutton path="gender" value="true" />
+								Male
+								<form:radiobutton path="gender" value="false" />
+								Female
+							</div></td>
+					</tr>
+					<tr>
+						<td><div class="form-group">
+								<div>Email</div>
+							</div></td>
+						<td><div class="form-group">
+								<form:input class="form-control" path="email" />
+								<form:errors path="email" cssClass="error" />
+							</div></td>
+						<td><div class="form-group"></div></td>
+						<td><div class="form-group">
+								<input type="button" id="resetBtn" value="Reset"
+									onclick="resetProcess()" class="btn btn-default"> <input
+									type="button" id="searchBtn" value="Search"
+									class="btn btn-default">
+							</div></td>
+					</tr>
 				</table>
-				<form:hidden path="currentPage" />
-				<form:hidden path="numOfPage" />
-				<form:hidden path="sort" />
-				<CustomTagLib:pagenavigation
-					current="${customersearchdata.currentPage}"
-					max="${customersearchdata.numOfPage}" />
 			</div>
+			<form:hidden path="currentPage" />
+			<form:hidden path="numOfPage" />
+			<form:hidden path="sortName" class="sort" />
+			<form:hidden path="sortDob" class="sort" />
+			<form:hidden path="sortPhone" class="sort" />
+			<form:hidden path="sortEmail" class="sort" />
 		</form:form>
 		<table>
 			<tr>
-				<td><div class="form-group"><form:form id="newForm" method="POST" action="create">
-						<input type="submit" id="newBtn" value="New" class="btn btn-default">
-					</form:form></div></td>
-				<td><div class="form-group"><form:form id="updateForm" method="POST" action="update">
-						<input type="hidden" id="customerId" name="customerId">
-						<input type="button" id="updateBtn" value="Update" class="btn btn-default">
-					</form:form></div></td>
-				<td><div class="form-group"><form:form id="deleteForm" method="GET" action="delete">
-						<input type="hidden" id="customerIds" name="customerIds">
-						<input type="button" id="deleteBtn" value="Delete" class="btn btn-default">
-					</form:form></div></td>
-				<td><div class="form-group"><form:form id="exportForm" method="GET" action="report">
-						<input type="submit" id="exportBtn" value="Export" class="btn btn-default">
-					</form:form></div></td>
+
+				<td><div class="form-group">
+						<form:form id="updateForm" method="POST" action="update">
+							<input type="hidden" id="customerId" name="customerId">
+							<input type="button" id="updateBtn" value="Update"
+								class="btn btn-default">
+						</form:form>
+					</div></td>
+				<td><div class="form-group">
+						<form:form id="createForm" method="POST" action="customer">
+							<input type="button" id="newBtn" value="New"
+								class="btn btn-default">
+						</form:form>
+					</div></td>
+				<td><div class="form-group">
+						<form:form id="deleteForm" method="GET" action="delete">
+							<input type="hidden" id="customerIds" name="customerIds">
+							<input type="button" id="deleteBtn" value="Delete"
+								class="btn btn-default">
+						</form:form>
+					</div></td>
+				<td><div class="form-group">
+						<form:form id="exportForm" method="GET" action="report">
+							<input type="submit" id="exportBtn" value="Export"
+								class="btn btn-default">
+						</form:form>
+					</div></td>
 			</tr>
 		</table>
+		<div class="table-responsive">
+			<table class="table" id="listTable">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Name <span
+							onclick="sortClick('Name','${customersearchdata.sortName}')"
+							class="sort-arrow">${customersearchdata.sortName}</span></th>
+						<th>Date of Birth <span
+							onclick="sortClick('Dob','${customersearchdata.sortDob}')"
+							class="sort-arrow">${customersearchdata.sortDob}</span></th>
+						<th>Phone <span
+							onclick="sortClick('Phone','${customersearchdata.sortPhone}')"
+							class="sort-arrow">${customersearchdata.sortPhone}</span></th>
+						<th>Email <span
+							onclick="sortClick('Email','${customersearchdata.sortEmail}')"
+							class="sort-arrow">${customersearchdata.sortEmail}</span></th>
+					</tr>
+				</thead>
+				<c:forEach var="customer" items="${lstcustomer}">
+					<tr>
+						<td><div class="form-group">
+								<input type="checkbox" name="${customer.id}"
+									value="${customer.id}" onclick="fetchId(${customer.id})">
+							</div></td>
+						<td><div class="form-group">${customer.name}</div></td>
+						<td><div class="form-group">${customer.dateOfBirth}</div></td>
+						<td><div class="form-group">${customer.phone}</div></td>
+						<td><div class="form-group">${customer.email}</div></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<CustomTagLib:pagenavigation
+				current="${customersearchdata.currentPage}"
+				max="${customersearchdata.numOfPage}" />
+		</div>
+
+
 		<form action="<c:url value="/j_spring_security_logout" />"
 			method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <input type="submit" value="Logout" class="btn btn-default" />
+				value="${_csrf.token}" /> <input type="submit" value="Logout"
+				class="btn btn-default" />
 		</form>
 	</div>
 </body>
@@ -133,11 +180,18 @@
 	function fetchId(id) {
 		document.getElementById("customerId").value=id;
 	}
+	function newClick(){
+		$('#createForm').submit();
+	}
 	function pageNavClick(o){
 		$('#currentPage').val(o.value);
 		$('#searchForm').submit();
 	}
 	function searchClick(){
+		var validator = $('#searchForm')[0].checkValidity();
+		if (!validator)
+			return;
+		$('.sort').val("");
 		$('#currentPage').val("");
 		$('#numOfPages').val("");
 		$('#searchForm').submit();
@@ -163,7 +217,14 @@
 			$('#deleteForm').submit();
 		}	
 	}
+	function sortClick(name, method){
+		$('.sort').val("");
+		var id = "sort"+name;
+		document.getElementById(id).value=method;
+		$('#searchForm').submit();
+	}
 	$('.pageNav').attr("onclick","pageNavClick(this)");
+	$('#newBtn').attr("onclick","newClick()");
 	$('#searchBtn').attr("onclick","searchClick()");
 	$('#updateBtn').attr("onclick","updateClick()");
 	$('#deleteBtn').attr("onclick","deleteClick()");

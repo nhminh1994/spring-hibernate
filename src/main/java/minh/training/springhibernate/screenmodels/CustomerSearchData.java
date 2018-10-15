@@ -17,7 +17,10 @@ public class CustomerSearchData implements java.io.Serializable  {
 	private Boolean gender;
 	private Integer currentPage;
 	private Integer numOfPage;
-	private String sort;
+	private String sortName;
+	private String sortDob;
+	private String sortPhone;
+	private String sortEmail;
 
 	public CustomerSearchData() {
 	}
@@ -87,11 +90,35 @@ public class CustomerSearchData implements java.io.Serializable  {
 		this.numOfPage = numOfPage;
 	}
 
-	public String getSort() {
-		return sort;
+	public String getSortName() {
+		return sortName;
 	}
 
-	public void setSort(String sort) {
-		this.sort = sort;
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
+
+	public String getSortDob() {
+		return sortDob;
+	}
+
+	public void setSortDob(String sortDob) {
+		this.sortDob = sortDob;
+	}
+
+	public String getSortPhone() {
+		return sortPhone;
+	}
+
+	public void setSortPhone(String sortPhone) {
+		this.sortPhone = sortPhone;
+	}
+
+	public String getSortEmail() {
+		return sortEmail;
+	}
+
+	public void setSortEmail(String sortEmail) {
+		this.sortEmail = sortEmail;
 	}
 }

@@ -1,4 +1,9 @@
 @CHARSET "ISO-8859-1";
 .sort-arrow {
-	font-size: 5px;
+	font-size: 11px;
+	cursor: pointer;
+}
+td {
+	padding-right: 5px !important;
+	padding-top: 5px !important;
 }

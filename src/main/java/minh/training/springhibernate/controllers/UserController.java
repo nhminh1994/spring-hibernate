@@ -1,5 +1,8 @@
 package minh.training.springhibernate.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,9 @@ public class UserController {
 
 	@RequestMapping(value = { "/login" })
 	public String login(
-			@RequestParam(value = "error", required = false) final String error, final Model model) {
+			@RequestParam(value = "error", required = false) final String error, 
+			HttpServletRequest request, final Model model) {
+		Object message = request.getAttribute("SPRING_SECURITY_LAST_EXCEPTION ");
 		if (error != null) {
 			model.addAttribute("message", "Login Failed!");
 		}

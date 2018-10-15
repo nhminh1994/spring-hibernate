@@ -34,6 +34,11 @@
 			<input
 				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="error-login">${message}</div>
+			<c:if test="${param.auth eq 'failure'}">
+				<div class="error">
+					<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+				</div>
+			</c:if>
 		</div>
 	</form>
 

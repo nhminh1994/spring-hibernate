@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/error.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/sort.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/js/myjs.js" />"></script>
 <title>Customer Detail</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,7 +20,7 @@
 	<div class="container">
 		<h3>Customer Information</h3>
 		<br>
-		<form:form id="detailForm" method="POST" action="processupdate"
+		<form:form id="detailForm" method="POST" action="${pageContext.request.contextPath}/processupdate"
 			modelAttribute="customerdetaildata">
 			<form:hidden path="id" />
 			<table>
@@ -33,14 +35,14 @@
 					<td>
 						<div>Phone</div>
 					</td>
-					<td><form:input class="form-control" path="phone" type="number" />
+					<td><form:input class="form-control" path="phone" onkeypress="return AllowOnlyNumbers(event);" />
 						<form:errors path="phone" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Date of Birth</div>
 					</td>
-					<td><form:input class="form-control" type="date" path="dateOfBirth" /> <form:errors
+					<td><form:input class="form-control" type="date" path="dateOfBirth" min="2000-01-01" /> <form:errors
 							path="dateOfBirth" cssClass="error" /></td>
 				</tr>
 				<tr>

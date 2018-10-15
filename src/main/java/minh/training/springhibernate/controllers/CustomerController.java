@@ -24,6 +24,7 @@ import minh.training.springhibernate.screenmodels.CustomerSearchData;
 import minh.training.springhibernate.services.CustomerService;
 import minh.training.springhibernate.utils.ExcelReportView;
 import minh.training.springhibernate.utils.MyCommonUtils;
+import minh.training.springhibernate.utils.SortUtils;
 
 @Controller
 public class CustomerController {
@@ -44,10 +45,18 @@ public class CustomerController {
 			customer.setNumOfPage(numOfCustomers % pageSize == 0 ? numOfPages : numOfPages+1);
 			customer.setCurrentPage(1);
 		}
+		if (null == customer.getGender()){
+			customer.setGender(true);
+		}
+		if (null == customer.getSortName() && null == customer.getSortDob())
 		if (result.hasErrors()) {
 			return "/customers/customerlist";
 		}
-		List<CustomerDetailData> lstCustomer = customerService.getListPagingCustomer(customer, customer.getCurrentPage());
+		List<CustomerDetailData> lstCustomer = customerService.getListPagingCustomer(customer);
+		customer.setSortDob(SortUtils.getReverseSort(customer.getSortDob()));
+		customer.setSortName(SortUtils.getReverseSort(customer.getSortName()));
+		customer.setSortEmail(SortUtils.getReverseSort(customer.getSortEmail()));
+		customer.setSortPhone(SortUtils.getReverseSort(customer.getSortPhone()));
 		modelMap.put("lstcustomer", lstCustomer);
 		return "/customers/customerlist";
 	}
@@ -59,9 +68,12 @@ public class CustomerController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
 
-	@RequestMapping(value = { "create" })
+	@RequestMapping(value = { "customer", "customer/*" })
 	public String create(@ModelAttribute("customerdetaildata") CustomerDetailData customer, ModelMap modelMap) {
 		modelMap.put("titlemap", titleMap);
+		if (null == customer.getGender()){
+			customer.setGender(true);
+		}
 		return "/customers/customerdetail";
 	}
 
@@ -81,7 +93,7 @@ public class CustomerController {
 			final RedirectAttributes redirectAttributes) {
 		CustomerDetailData c = customerService.getCustomerDetailById(id);
 		redirectAttributes.addFlashAttribute("customerdetaildata", c);
-		return "redirect:create";
+		return "redirect:customer/"+id;
 	}
 
 	@RequestMapping("/report")
