@@ -42,7 +42,7 @@
 					<td>
 						<div>Date of Birth</div>
 					</td>
-					<td><form:input class="form-control" type="date" path="dateOfBirth" min="2000-01-01" /> <form:errors
+					<td><form:input class="form-control" type="date" path="dateOfBirth" min="1970-01-01" /> <form:errors
 							path="dateOfBirth" cssClass="error" /></td>
 				</tr>
 				<tr>

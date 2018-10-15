@@ -11,12 +11,15 @@
 <link href="<c:url value="/resources/css/error.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/sort.css" />" rel="stylesheet">
 <script src="<c:url value="/resources/js/myjs.js" />"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet prefetch"
+	href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
 <%-- <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
@@ -54,7 +57,7 @@
 							</div></td>
 						<td><div class="form-group">
 								<form:input class="form-control" type="date" path="dateOfBirth"
-									min="2000-01-01" />
+									min="1970-01-01" />
 								<form:errors path="dateOfBirth" cssClass="error" />
 							</div></td>
 						<td><div class="form-group">
@@ -95,16 +98,17 @@
 		<table>
 			<tr>
 
+
 				<td><div class="form-group">
-						<form:form id="updateForm" method="POST" action="update">
-							<input type="hidden" id="customerId" name="customerId">
-							<input type="button" id="updateBtn" value="Update"
+						<form:form id="createForm" method="POST" action="customer">
+							<input type="button" id="newBtn" value="New"
 								class="btn btn-default">
 						</form:form>
 					</div></td>
 				<td><div class="form-group">
-						<form:form id="createForm" method="POST" action="customer">
-							<input type="button" id="newBtn" value="New"
+						<form:form id="updateForm" method="POST" action="update">
+							<input type="hidden" id="customerId" name="customerId">
+							<input type="button" id="updateBtn" value="Update"
 								class="btn btn-default">
 						</form:form>
 					</div></td>
@@ -155,9 +159,11 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<CustomTagLib:pagenavigation
-				current="${customersearchdata.currentPage}"
-				max="${customersearchdata.numOfPage}" />
+			<div class="pull-right">
+				<CustomTagLib:pagenavigation
+					current="${customersearchdata.currentPage}"
+					max="${customersearchdata.numOfPage}" />
+			</div>
 		</div>
 
 
@@ -188,7 +194,7 @@
 		$('#searchForm').submit();
 	}
 	function searchClick(){
-		var validator = $('#searchForm')[0].checkValidity();
+		var validator = $('#searchForm')[0].reportValidity();
 		if (!validator)
 			return;
 		$('.sort').val("");

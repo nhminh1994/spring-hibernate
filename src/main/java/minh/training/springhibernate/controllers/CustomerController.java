@@ -37,16 +37,15 @@ public class CustomerController {
 	@RequestMapping(value = { "customers", "/" })
 	public String customerlist(@ModelAttribute("customersearchdata") @Valid CustomerSearchData customer, BindingResult result,
 			ModelMap modelMap) {
-		
+		if (null == customer.getGender()){
+			customer.setGender(true);
+		}
 		if (null == customer.getNumOfPage() || null == customer.getCurrentPage()){
 			int numOfCustomers = customerService.countCustomers(customer);
 			int pageSize = MyCommonUtils.PAGE_SIZE;
 			int numOfPages = numOfCustomers / pageSize;
 			customer.setNumOfPage(numOfCustomers % pageSize == 0 ? numOfPages : numOfPages+1);
 			customer.setCurrentPage(1);
-		}
-		if (null == customer.getGender()){
-			customer.setGender(true);
 		}
 		if (null == customer.getSortName() && null == customer.getSortDob())
 		if (result.hasErrors()) {
