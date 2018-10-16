@@ -20,29 +20,31 @@ public class PageNavitionTag extends SimpleTagSupport {
         String nextPage = "<input id=\"nextpageno\" type=\"button\" value=\"" + (current+1) + "\" class=\"pageNav btn btn-default\">";
         String previousPage = "<input id=\"prevpageno\" type=\"button\" value=\"" + (current-1) + "\" class=\"pageNav btn btn-default\">";
         StringBuilder tag = new StringBuilder();
-        if (current == 1 && current < max){
-        	tag.append(currentPage);
-        	tag.append(nextPage);
-        	tag.append(next);
-        	tag.append(last);
+        if (max != 0){
+	        if (current == 1 && current < max){
+	        	tag.append(currentPage);
+	        	tag.append(nextPage);
+	        	tag.append(next);
+	        	tag.append(last);
+	        }
+	        else if (current == max){
+	        	if (max != 1){
+	        		tag.append(first);
+	        		tag.append(previous);
+	        		tag.append(previousPage);
+	        	}
+	        	tag.append(currentPage);
+	        }
+	        else {
+	        	tag.append(first);
+	        	tag.append(previous);
+	        	tag.append(previousPage);
+	        	tag.append(currentPage);
+	        	tag.append(nextPage);
+	        	tag.append(next);
+	        	tag.append(last);
+	        } 
         }
-        else if (current == max){
-        	if (max != 1){
-        		tag.append(first);
-        		tag.append(previous);
-        		tag.append(previousPage);
-        	}
-        	tag.append(currentPage);
-        }
-        else {
-        	tag.append(first);
-        	tag.append(previous);
-        	tag.append(previousPage);
-        	tag.append(currentPage);
-        	tag.append(nextPage);
-        	tag.append(next);
-        	tag.append(last);
-        } 
         writer.print(tag.toString());
     }
 	public void setCurrent(int current) {

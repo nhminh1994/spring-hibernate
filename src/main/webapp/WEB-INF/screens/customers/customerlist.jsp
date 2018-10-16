@@ -1,13 +1,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="CustomTagLib" uri="CustomTagLib"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value="/resources/css/error.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/sort.css" />" rel="stylesheet">
 <script src="<c:url value="/resources/js/myjs.js" />"></script>
@@ -56,8 +56,15 @@
 								<div>Date of Birth</div>
 							</div></td>
 						<td><div class="form-group">
-								<form:input class="form-control" type="date" path="dateOfBirth"
-									min="1970-01-01" />
+								<%-- <form:input class="form-control" type="date" path="dateOfBirth"
+									min="1970-01-01" /> --%>
+								<div class="input-group date" data-provide="datepicker"
+									data-date-format="dd/mm/yyyy">
+									<form:input path="dateOfBirth" type="text" class="form-control" />
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-th"></span>
+									</div>
+								</div>
 								<form:errors path="dateOfBirth" cssClass="error" />
 							</div></td>
 						<td><div class="form-group">
@@ -106,11 +113,9 @@
 						</form:form>
 					</div></td>
 				<td><div class="form-group">
-						<form:form id="updateForm" method="POST" action="update">
-							<input type="hidden" id="customerId" name="customerId">
-							<input type="button" id="updateBtn" value="Update"
-								class="btn btn-default">
-						</form:form>
+						<input type="button" id="updateBtn" value="Update"
+							class="btn btn-default"> <input type="hidden"
+							id="customerId" name="customerId">
 					</div></td>
 				<td><div class="form-group">
 						<form:form id="deleteForm" method="GET" action="delete">
@@ -204,8 +209,9 @@
 	}
 	function updateClick(){
 		var id = document.getElementById( "customerId" ).value;
-		if (id != "" && typeof id !== "undefined")
-			$('#updateForm').submit();
+		var updateForm = $('#updateForm');
+		var url = "${pageContext.request.contextPath}/customer/"+id;
+		window.location=url;
 	}
 	function deleteClick(){
 		

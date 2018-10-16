@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import minh.training.springhibernate.daos.UserDAO;
 
-public class MyUserDetailsService implements UserDetailsService {
+public class NewUserDetailsService implements UserDetailsService {
 	private UserDAO userDAO;
 	@Required
 	public void setUserDAO(UserDAO userDAO) {

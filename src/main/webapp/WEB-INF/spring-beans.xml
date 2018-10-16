@@ -17,9 +17,14 @@
 	</bean>
 
 	<!-- Services -->
+	<alias name="newUserDetailsService" alias="userDetailsService" />
 	<alias name="myUserDetailsService" alias="userDetailsService" />
 	<bean id="myUserDetailsService"
 		class="minh.training.springhibernate.services.impl.MyUserDetailsService">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="newUserDetailsService"
+		class="minh.training.springhibernate.services.impl.NewUserDetailsService">
 		<property name="userDAO" ref="userDAO"></property>
 	</bean>
 	<alias name="customerDefaultService" alias="customerService" />
@@ -35,7 +40,7 @@
 	</bean>
 	<bean id="customDaoAuthenticationProvider"
 		class="minh.training.springhibernate.security.CustomDaoAuthenticationProvider">
-		<property name="userDetailsService" ref="myUserDetailsService"></property>
+		<property name="userDetailsService" ref="userDetailsService"></property>
 		<property name="passwordEncoder" ref="myPassWordEncoder"></property>
 	</bean>
 	

@@ -43,8 +43,11 @@ public class CustomerDefaultService implements CustomerService {
 
 	public CustomerDetailData getCustomerDetailById(Integer id) {
 		Customer c = customerDAO.getCustomerById(id);
-		CustomerDetailData cd = new CustomerDetailData(c.getId(), c.getName(), c.getDateOfBirth(), c.getPhone(),
+		CustomerDetailData cd = null;
+		if (null != c){
+			cd = new CustomerDetailData(c.getId(), c.getName(), c.getDateOfBirth(), c.getPhone(),
 				c.getEmail(), c.getGender(), c.getAddressLine(), c.getTitle());
+		}
 		return cd;
 	}
 

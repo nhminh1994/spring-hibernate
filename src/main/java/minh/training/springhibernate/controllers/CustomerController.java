@@ -14,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,22 +37,23 @@ public class CustomerController {
 	private HashMap<String, String> titleMap;
 
 	@RequestMapping(value = { "customers", "/" })
-	public String customerlist(@ModelAttribute("customersearchdata") @Valid CustomerSearchData customer, BindingResult result,
-			ModelMap modelMap) {
-		if (null == customer.getGender()){
+	public String customerlist(@ModelAttribute("customersearchdata") @Valid CustomerSearchData customer,
+			BindingResult result, ModelMap modelMap) {
+		if (null == customer.getGender()) {
 			customer.setGender(true);
 		}
-		if (null == customer.getNumOfPage() || null == customer.getCurrentPage()){
-			int numOfCustomers = customerService.countCustomers(customer);
-			int pageSize = MyCommonUtils.PAGE_SIZE;
-			int numOfPages = numOfCustomers / pageSize;
-			customer.setNumOfPage(numOfCustomers % pageSize == 0 ? numOfPages : numOfPages+1);
+		int numOfCustomers = customerService.countCustomers(customer);
+		int pageSize = MyCommonUtils.PAGE_SIZE;
+		int numOfPages = numOfCustomers / pageSize;
+		int num = numOfCustomers % pageSize == 0 ? numOfPages : numOfPages + 1;
+		if (null == customer.getCurrentPage() || num != customer.getNumOfPage()) {
 			customer.setCurrentPage(1);
 		}
+		customer.setNumOfPage(num);
 		if (null == customer.getSortName() && null == customer.getSortDob())
-		if (result.hasErrors()) {
-			return "/customers/customerlist";
-		}
+			if (result.hasErrors()) {
+				return "/customers/customerlist";
+			}
 		List<CustomerDetailData> lstCustomer = customerService.getListPagingCustomer(customer);
 		customer.setSortDob(SortUtils.getReverseSort(customer.getSortDob()));
 		customer.setSortName(SortUtils.getReverseSort(customer.getSortName()));
@@ -62,15 +65,15 @@ public class CustomerController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
 
-	@RequestMapping(value = { "customer", "customer/*" })
+	@RequestMapping(value = { "customer" })
 	public String create(@ModelAttribute("customerdetaildata") CustomerDetailData customer, ModelMap modelMap) {
 		modelMap.put("titlemap", titleMap);
-		if (null == customer.getGender()){
+		if (null == customer.getGender()) {
 			customer.setGender(true);
 		}
 		return "/customers/customerdetail";
@@ -87,12 +90,20 @@ public class CustomerController {
 		return new ModelAndView("redirect:/customers");
 	}
 
-	@RequestMapping(value = { "update" })
-	public String processUpdate(@RequestParam(value = "customerId") Integer id, ModelMap modelMap,
-			final RedirectAttributes redirectAttributes) {
-		CustomerDetailData c = customerService.getCustomerDetailById(id);
-		redirectAttributes.addFlashAttribute("customerdetaildata", c);
-		return "redirect:customer/"+id;
+	@RequestMapping(value = "/customer/{cusid}", method = RequestMethod.GET)
+	public ModelAndView update(@ModelAttribute("customerdetaildata") CustomerDetailData customer,
+			@PathVariable Integer cusid, ModelMap modelMap, final RedirectAttributes redirectAttributes) {
+		customer = customerService.getCustomerDetailById(cusid);
+		if (customer == null){
+			return new ModelAndView("redirect:/customers");
+		}
+		modelMap.addAttribute("customerdetaildata", customer);
+		modelMap.put("titlemap", titleMap);
+		if (null == customer.getGender()) {
+			customer.setGender(true);
+		}
+		
+		return new ModelAndView("/customers/customerdetail");
 	}
 
 	@RequestMapping("/report")
@@ -100,7 +111,7 @@ public class CustomerController {
 		List<CustomerDetailData> lstCustomer = customerService.getListCustomer(new CustomerSearchData());
 		return new ModelAndView(new ExcelReportView(), "customerlist", lstCustomer);
 	}
-	
+
 	@RequestMapping(value = { "delete" })
 	public String delete(@RequestParam(value = "customerIds") String ids, ModelMap modelMap,
 			final RedirectAttributes redirectAttributes) {

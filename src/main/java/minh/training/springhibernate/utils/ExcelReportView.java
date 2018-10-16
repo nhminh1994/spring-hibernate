@@ -41,7 +41,7 @@ public class ExcelReportView extends AbstractXlsView {
 			row.createCell(cellIdx++).setCellValue(customer.getDateOfBirth().toString());
 			row.createCell(cellIdx++).setCellValue(customer.getPhone());
 			row.createCell(cellIdx++).setCellValue(customer.getEmail());
-			row.createCell(cellIdx++).setCellValue(customer.getGender());
+			row.createCell(cellIdx++).setCellValue(customer.getGender()?"Male":"Female");
 			row.createCell(cellIdx++).setCellValue(customer.getAddressLine());
 			row.createCell(cellIdx++).setCellValue(customer.getTitle());
 		}

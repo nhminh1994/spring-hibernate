@@ -16,7 +16,7 @@
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-
+		<property name="contentType" value="text/html;charset=UTF-8" />
 		<property name="prefix">
 			<value>/WEB-INF/screens/</value>
 		</property>

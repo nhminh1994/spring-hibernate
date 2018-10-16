@@ -15,12 +15,17 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet prefetch"
+	href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 </head>
 <body>
 	<div class="container">
 		<h3>Customer Information</h3>
 		<br>
-		<form:form id="detailForm" method="POST" action="${pageContext.request.contextPath}/processupdate"
+		<form:form id="detailForm" method="POST"
+			action="${pageContext.request.contextPath}/processupdate"
 			modelAttribute="customerdetaildata">
 			<form:hidden path="id" />
 			<table>
@@ -28,22 +33,28 @@
 					<td>
 						<div>Name</div>
 					</td>
-					<td><form:input class="form-control" path="name" /> <form:errors path="name"
-							cssClass="error" /></td>
+					<td><form:input class="form-control" path="name" /> <form:errors
+							path="name" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Phone</div>
 					</td>
-					<td><form:input class="form-control" path="phone" onkeypress="return AllowOnlyNumbers(event);" />
-						<form:errors path="phone" cssClass="error" /></td>
+					<td><form:input class="form-control" path="phone"
+							onkeypress="return AllowOnlyNumbers(event);" /> <form:errors
+							path="phone" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Date of Birth</div>
 					</td>
-					<td><form:input class="form-control" type="date" path="dateOfBirth" min="1970-01-01" /> <form:errors
-							path="dateOfBirth" cssClass="error" /></td>
+					<td><div class="input-group date" data-provide="datepicker"
+							data-date-format="dd/mm/yyyy">
+							<form:input path="dateOfBirth" type="text" class="form-control" />
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-th"></span>
+							</div>
+						</div> <form:errors path="dateOfBirth" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
@@ -57,15 +68,15 @@
 					<td>
 						<div>Email</div>
 					</td>
-					<td><form:input path="email" class="form-control"/> <form:errors path="email"
-							cssClass="error" /></td>
+					<td><form:input path="email" class="form-control" /> <form:errors
+							path="email" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
 						<div>Address</div>
 					</td>
-					<td><form:textarea path="addressLine" class="form-control"/> <form:errors
-							path="addressLine" cssClass="error" /></td>
+					<td><form:textarea path="addressLine" class="form-control" />
+						<form:errors path="addressLine" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>
@@ -77,14 +88,14 @@
 				</tr>
 				<tr>
 					<td><input type="button" id="resetBtn" value="Reset"
-						onclick="reset()" class="btn btn-default"> <input type="submit" id="saveBtn"
-						value="Save" class="btn btn-default"></td>
+						onclick="reset()" class="btn btn-default"> <input
+						type="submit" id="saveBtn" value="Save" class="btn btn-default"></td>
 				</tr>
 			</table>
 		</form:form>
 	</div>
 </body>
 <script>
-
+	
 </script>
 </html>
